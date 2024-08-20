@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:plant/components/my_textfield.dart';
 import 'package:plant/components/social_button.dart';
+import 'package:plant/helper/helper_function.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -16,7 +18,36 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
+
   bool _isChecked = false;
+
+  void registerUser() async {
+    showDialog(
+      context: context,
+      builder: (context) => const Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
+
+    if (passwordController.text != confirmPasswordController.text) {
+      Navigator.pop(context);
+      displayMessageToUser("Passwords don't match!", context);
+    }
+   else{
+     try {
+      UserCredential? userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+              email: emailController.text, password: passwordController.text);
+      // ignore: use_build_context_synchronously
+      Navigator.pushNamed(context, '/home_page');
+    } on FirebaseAuthException catch (e) {
+      // ignore: use_build_context_synchronously
+      Navigator.pop(context);
+      // ignore: use_build_context_synchronously
+      displayMessageToUser(e.code, context);
+    }
+   }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -135,7 +166,7 @@ class _RegisterPageState extends State<RegisterPage> {
               SizedBox(
                 width: double.infinity,
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: registerUser,
                   child: Padding(
                     padding:
                         const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
