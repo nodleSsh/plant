@@ -1,12 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:plant/components/drawer.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
-  void logout() {
+  void logout(context) {
     FirebaseAuth.instance.signOut();
+    Navigator.pop(context);
   }
 
   @override
@@ -15,12 +17,12 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Home'),
         actions: [
-          IconButton(
-            onPressed: logout,
-            icon: Icon(Icons.logout),
+          Container(
+            
           ),
         ],
       ),
+      drawer: const MyDrawer(),
     );
   }
 }

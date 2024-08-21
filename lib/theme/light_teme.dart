@@ -6,6 +6,7 @@ ThemeData lightMode = ThemeData(
     background: Colors.white,
     primary: Color(0xFF004643),
     secondary: Color(0xFFC4C4C4),
+    tertiary: Color(0xFF757575),
     // inversePrimary: 
   ),
   textTheme:  ThemeData.light().textTheme.apply(

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:plant/components/logo.dart';
 import 'package:plant/components/my_textfield.dart';
 import 'package:plant/components/social_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -51,29 +52,7 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Image(
-                image: AssetImage(
-                  'lib/images/logo4.png',
-                ),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              RichText(
-                text: const TextSpan(
-                  text: 'My',
-                  style: TextStyle(
-                      color: Color(0xFF757575),
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: 'PLANT',
-                      style: TextStyle(color: Color(0xFF004643)),
-                    ),
-                  ],
-                ),
-              ),
+              const MyLogo(),
               const SizedBox(
                 height: 20,
               ),
